@@ -1,18 +1,19 @@
 class PostsController < ApplicationController
-  before_filter :set_post, except: [:index, :create]
+  before_filter :set_post, except: [:index, :create, :new]
 
   def index
-    @posts = Post.order("created_at desc")
+    @posts = Post.order("created_at desc").page(params[:page])
   end
 
-  def show
+  def new
+    @post = Post.new
   end
 
   def create
     @post = Post.new
-    reponse_to do |format|
+    respond_to do |format|
       if PostManager.create(@post, post_params)
-        format.html { redirect_to post_path(@post), notice: "Post was successfully created." }
+        format.html { redirect_to posts_path, notice: "Post was successfully created." }
         format.json { head :no_content }
       end
     end
@@ -22,16 +23,16 @@ class PostsController < ApplicationController
   end
 
   def update
-    reponse_to do |format|
-      if PostManager.update(post_params)
-        format.html { redirect_to post_path(@post), notice: "Post was successfully updated." }
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to posts_path, notice: "Post was successfully updated." }
         format.json { head :no_content }
       end
     end
   end
 
   def destroy
-    reponse_to do |format|
+    respond_to do |format|
       if @post.destroy
         format.html { redirect_to posts_path, notice: "Post was successfully deleted." }
         format.json {head :no_content }
@@ -48,7 +49,8 @@ class PostsController < ApplicationController
       params.require(:post).permit(
         :title,
         :content,
-        :cover_photo
+        :cover_photo,
+        :remote_cover_photo_url
       )
     end
 end

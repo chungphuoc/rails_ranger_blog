@@ -1,1 +1,15 @@
-index
+<% @posts.each do |post|%>
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class=""><%= post.title %> <br> <%= link_to 'Edit', edit_post_path(post) %> | <%= link_to 'Delete', post_path(post), method: :delete, data: {confirm: "Are you sure?"} %> </h2>
+      <p class="lead"><%= raw post.content %></p>
+    </div>
+    <div class="col-md-5">
+      <%= image_tag(render_cover_photo(post), class: 'featurette-image img-responsive center-block') %>
+    </div>
+  </div>
+  <hr class="featurette-divider">
+<% end %>
+<div class="row">
+  <%= paginate @posts %>
+</div>

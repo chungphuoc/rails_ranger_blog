@@ -46,3 +46,7 @@ group :development do
 end
 
 gem 'puma'
+gem 'summernote-rails', git: 'https://github.com/summernote/summernote-rails.git'
+gem 'bootstrap-sass'
+gem 'carrierwave'
+gem 'kaminari'

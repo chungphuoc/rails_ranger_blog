@@ -1,0 +1,21 @@
+<div class="block-content block-content-narrow">
+  <%= form_for @post, html: {class: 'form-new-post'} do |f| %>
+    <h2 class="form-signin-heading">Create new post</h2>
+    <div class="form-group">
+      <%= f.label :title, for: 'title' %>
+      <%= f.text_field :title, autofocus: true, class: 'form-control', id: 'title', placeholder: "Enter blog title", required: 'true' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content, for: 'content' %>
+      <%= f.text_area :content, class: 'form-control', id: 'content', required: 'true' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :cover_photo, for: 'cover_photo' %>
+      <%= text_field_tag "post[remote_cover_photo_url]", nil, class: 'form-control', placeholder: "Enter url of cover photo" %>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Create post</button>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $('#content').summernote();
+</script>
