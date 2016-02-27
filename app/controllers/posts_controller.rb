@@ -2,7 +2,12 @@ class PostsController < ApplicationController
   before_filter :set_post, except: [:index, :create, :new]
 
   def index
-    @posts = Post.order("created_at desc").page(params[:page])
+    @total_posts = Post.all.count
+    if params[:keyword].present?
+      @posts = Post.where("title LIKE ?", "%#{params[:keyword]}%").page(params[:page])
+    else
+      @posts = Post.order("created_at desc").page(params[:page])
+    end
   end
 
   def new

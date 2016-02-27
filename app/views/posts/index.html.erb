@@ -1,3 +1,12 @@
+<h1>There are <%= @total_posts %> posts on this blog</h1>
+<%= form_tag '', class: 'form-query', method: :get do %>
+  <div class="col-md-6 form-group">
+    <%= text_field_tag 'keyword', params[:keyword], class: 'form-control', placeholder: 'Enter your keyword' %>
+  </div>
+  <div class="form-group">
+    <%= submit_tag 'Search', class: 'btn btn-primary', data: {disable_with: "Searching, please wait..."} %>
+  </div>
+<% end %>
 <% @posts.each do |post|%>
   <div class="row featurette">
     <div class="col-md-7">
