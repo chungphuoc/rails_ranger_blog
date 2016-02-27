@@ -8,9 +8,6 @@ default: &default
   adapter: postgresql
   pool: 5
   encoding: unicode
-  username: railsapp
-  password: password1
-  host: localhost
 
 development:
   <<: *default
